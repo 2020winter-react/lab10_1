@@ -33,8 +33,8 @@ function todoReducer(todos, action) {
 
 
 const App = () => {
-  const [todos, setTodos] = useState(createBulkTodos);
-  // const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
+  // const [todos, setTodos] = useState(createBulkTodos);
+  const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
   const nextId = useRef(2501);
 
   const onInsert = useCallback(text => {
@@ -43,20 +43,20 @@ const App = () => {
       text,
       checked: false,
     };
-    setTodos(todos => todos.concat(todo));
-    // dispatch({type: 'INSERT', todo});
+    // setTodos(todos => todos.concat(todo));
+    dispatch({type: 'INSERT', todo});
     nextId.current += 1; // nextId 1 씩 더하기
   }, []);
 
   const onRemove = useCallback(id => {
-    setTodos(todos => todos.filter(todo => todo.id !== id));
-    // dispatch({type: 'REMOVE', id});
+    // setTodos(todos => todos.filter(todo => todo.id !== id));
+    dispatch({type: 'REMOVE', id});
   }, []);
 
   const onToggle = useCallback(id => {
-    setTodos(todos =>
-      todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo,),);
-    // dispatch({type: 'TOGGLE', id});
+    // setTodos(todos =>
+    //   todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo,),);
+    dispatch({type: 'TOGGLE', id});
   }, []);
 
 
